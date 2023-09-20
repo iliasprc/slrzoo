@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 from datasets.loader_utils import pad_video, video_transforms, sampling, VideoRandomResizedCrop
 from utils.utils import read_SIGNUM_CONTINUOUS_pkl
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/SIGNUM/'
+dataset_path = 'data/SIGNUM/'
 
 train_prefix = "train"
 dev_prefix = "test"

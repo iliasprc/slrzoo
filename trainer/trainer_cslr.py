@@ -237,7 +237,7 @@ class Trainer_CSLR_method(BaseTrainer):
                 '{} summary  Epoch: [{}/{}]\t {}'.format(
                     mode, epoch, self.epochs, metrics_string))
 
-    def _extract_features(self, save_folder='/home/papastrat/Desktop/ilias/datasets/csl_features/'):
+    def _extract_features(self, save_folder='data/csl_features/'):
         """
         Validate after training an epoch
         :param epoch: Integer, current training epoch.

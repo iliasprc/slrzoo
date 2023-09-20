@@ -74,7 +74,7 @@ class CSL_ISO(Dataset):
         # print(path,label)
         y = torch.tensor(label, dtype=torch.long)
         x = self.load_video_sequence_uniform_sampling(
-            path='/home/papastrat/Desktop/ilias/datasets/ChineseIsolated/' + path[-1], time_steps=self.seq_length,
+            path='data/ChineseIsolated/' + path[-1], time_steps=self.seq_length,
             dim=self.dim,
             augmentation=self.mode, padding=self.padding, normalize=self.normalize,
             img_type='jpg')

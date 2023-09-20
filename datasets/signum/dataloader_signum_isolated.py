@@ -9,7 +9,7 @@ from torch.utils.data import Dataset
 
 from datasets.loader_utils import pad_video, video_transforms, sampling, VideoRandomResizedCrop, read_signum_paths
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/SIGNUM'
+dataset_path = 'data/SIGNUM'
 
 
 class SIGNUM_ISO(Dataset):

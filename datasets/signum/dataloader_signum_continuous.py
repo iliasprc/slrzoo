@@ -10,7 +10,7 @@ from torch.utils.data import Dataset
 from datasets.loader_utils import multi_label_to_indexv2, VideoRandomResizedCrop, sampling, pad_video, \
     video_transforms,read_SIGNUM_CONTINUOUS_pkl
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/'
+dataset_path = 'data/'
 
 
 class SIGNUM(Dataset):
@@ -61,7 +61,7 @@ class SIGNUM(Dataset):
         # y = multi_label_to_index1(classes=self.classes, target_labels=self.labels[index])
         y = multi_label_to_indexv2(classes=self.classes, id2w=self.w2id, target_labels=self.labels[index])
         # print(ID,y,self.train_tokens[index])
-        x = self.load_video_sequence(path='/home/papastrat/Desktop/ilias/datasets/SIGNUM/' + ID,
+        x = self.load_video_sequence(path='data/SIGNUM/' + ID,
                                      time_steps=self.seq_length, dim=self.dim,
                                      augmentation=self.mode, padding=self.padding, normalize=self.normalize,
                                      img_type='jpg')

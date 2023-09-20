@@ -77,7 +77,7 @@ def select_isolated_dataset(config, args):
         from datasets import MSASL_Dataset
         train_prefix = "train"
         test_prefix = "test"
-        train_path = '/home/papastrat/Desktop/ilias/datasets/MS_ASL/MS-ASL_annotations/MSASL_train.json'
+        train_path = 'data/MS_ASL/MS-ASL_annotations/MSASL_train.json'
 
         _, classes = select_ASL_subset(train_path, 'TRAIN', N)
         training_set = MSASL_Dataset(mode=train_prefix, dim=dim, classes=N)

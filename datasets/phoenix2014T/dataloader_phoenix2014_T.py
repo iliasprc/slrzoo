@@ -11,9 +11,9 @@ from torch.utils.data import Dataset
 from datasets.loader_utils import multi_label_to_index_out_of_vocabulary
 from datasets.loader_utils import video_transforms, pad_video, sampling, VideoRandomResizedCrop, load_phoenix_2014_T
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/'
+dataset_path = 'data/'
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/PHOENIX-2014-T-release-v3/PHOENIX-2014-T/features/fullFrame-210x260px/'
+dataset_path = 'data/PHOENIX-2014-T-release-v3/PHOENIX-2014-T/features/fullFrame-210x260px/'
 feats_path = '/media/papastrat/60E8EA1EE8E9F268/ph2014T/'
 
 #

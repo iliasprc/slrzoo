@@ -22,7 +22,7 @@ from omegaconf import OmegaConf
 
 def arguments():
     parser = argparse.ArgumentParser(description='Continuous sign language recognition training')
-    parser.add_argument('--input-data', type=str, default='/home/papastrat/Desktop/ilias/datasets/',
+    parser.add_argument('--input-data', type=str, default='data/',
                         help='path to datasets')
     parser.add_argument('--dataset', type=str, default='dummy', metavar='rc',
                         help='slr dataset  greek_SI phoenixI5 phoenix2014feats  phoenix2014 phoenix2014T  GSL_SI  '

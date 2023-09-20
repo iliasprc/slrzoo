@@ -12,9 +12,9 @@ from datasets.loader_utils import multi_label_to_index_out_of_vocabulary
 from datasets.loader_utils import video_transforms, pad_video, sampling, VideoRandomResizedCrop
 from utils.utils import load_csv_file
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/'
+dataset_path = 'data'
 ssd_path = ''
-phv1_path = '/home/papastrat/Desktop/ilias/datasets/ph2014feats/'
+phv1_path = 'dataph2014feats/'
 
 
 class PHOENIX2014_FEATS(Dataset):

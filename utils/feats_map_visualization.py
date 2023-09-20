@@ -82,7 +82,7 @@ def select_model_for_vizulization():
 
         model.module.conv1.register_forward_hook(get_activation('conv1'))
     paths = {
-        'phoenix': '/home/papastrat/Desktop/ilias/datasets/phoenix_version1/phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/test/28September_2009_Monday_tagesschau_default-7/1'}
+        'phoenix': 'data/phoenix_version1/phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/test/28September_2009_Monday_tagesschau_default-7/1'}
 
 x = load_video_sequence(path=paths['phoenix'], time_steps=250, dim=(224, 224),
                         augmentation='test', padding=False, normalize=True, img_type='png').unsqueeze(0)  # .cuda()
