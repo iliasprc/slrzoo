@@ -1,0 +1,20 @@
+dataset:
+  name: gsl_sd
+  modality: features
+  images_path: GSL_continuous/
+  features_path: gsl_cont_features/
+  classes: 311
+  normalize: True
+  padding : False
+  dim: [224,224]
+  img_type: jpg
+  train:
+    seq_length: 250
+    augmentation: True
+  validation:
+    seq_length: 300
+    augmentation: False
+  test:
+    seq_length: 300
+    augmentation: False
+

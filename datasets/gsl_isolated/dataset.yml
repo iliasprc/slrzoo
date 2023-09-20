@@ -1,0 +1,20 @@
+dataset:
+  name: gsl_isolated
+  modality: features
+  images_path: GSL_isolated/
+  features_path: None
+  classes: 310
+  normalize: True
+  padding : True
+  dim: [224,224]
+  img_type: jpg
+  train:
+    seq_length: 25
+    augmentation: True
+  validation:
+    seq_length: 25
+    augmentation: False
+  test:
+    seq_length: 25
+    augmentation: False
+

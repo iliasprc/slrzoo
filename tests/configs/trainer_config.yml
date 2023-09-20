@@ -1,0 +1,34 @@
+trainer:
+  logger: train_SLRGAN
+  batch-size: 1
+  epochs: 50
+  seed: 1234
+  cuda: True
+  gpu: 0
+  save: True
+  log_interval: 1000
+  adversarial_loss: bcelogits
+  gradient_penalty: False
+  gradient_clipping: False
+  ctc: normal
+  generator:
+    optimizer:
+      type: Adam
+      lr: 1e-5
+      weight_decay: 0.00001
+    scheduler:
+      type: ReduceLRonPlateau
+      scheduler_factor: 0.5
+      scheduler_patience: 1
+      scheduler_min_lr: 5e-6
+      scheduler_verbose: 5e-6
+  discriminator:
+    optimizer:
+      type: RMSprop
+      lr: 1e-4
+    scheduler:
+      type: ReduceLRonPlateau
+      scheduler_factor: 0.5
+      scheduler_patience: 1
+      scheduler_min_lr: 5e-6
+      scheduler_verbose: 5e-6

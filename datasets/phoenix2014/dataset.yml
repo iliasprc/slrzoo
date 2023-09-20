@@ -1,0 +1,21 @@
+dataset:
+  name: pheonix2014
+  modality: features
+  images_path: phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/
+  features_path: ph2014feats/
+  hand_image_path: phoenix2014-release/phoenix-2014-multisigner/features/hand/
+  classes: 1234
+  normalize: True
+  padding : False
+  dim: [224,224]
+  img_type: png
+  train:
+    seq_length: 250
+    augmentation: True
+  dev:
+    seq_length: 300
+    augmentation: False
+  test:
+    seq_length: 300
+    augmentation: False
+

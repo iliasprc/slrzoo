@@ -1,0 +1,19 @@
+dataset:
+  name: phoenix_iso
+  modality: full
+  images_path: phoenix2014_isolated_train/
+  features_path: phoenix2014_isolated_train/
+  classes: 1232
+  normalize: True
+  padding : True
+  dim: [224,224]
+  img_type: png
+  train:
+    seq_length: 16
+    augmentation: True
+  dev:
+    seq_length: 16
+    augmentation: False
+  test:
+    seq_length: 16
+    augmentation: False

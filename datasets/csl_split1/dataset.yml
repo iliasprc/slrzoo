@@ -1,0 +1,20 @@
+dataset:
+  name: csl_split1
+  modality: features
+  images_path: csl/
+  features_path: csl/
+  classes: 178
+  normalize: True
+  padding : False
+  dim: [224,224]
+  img_type: jpg
+  train:
+    seq_length: 250
+    augmentation: True
+  validation:
+    seq_length: 300
+    augmentation: False
+  test:
+    seq_length: 300
+    augmentation: False
+

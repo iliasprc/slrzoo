@@ -1,0 +1,20 @@
+dataset:
+  name: ms_asl
+  modality: features
+  images_path: csl/
+  features_path: csl/
+  classes: 100
+  normalize: True
+  padding : True
+  dim: [224,224]
+  img_type: jpg
+  train:
+    seq_length: 64
+    augmentation: True
+  validation:
+    seq_length: 64
+    augmentation: False
+  test:
+    seq_length: 64
+    augmentation: False
+

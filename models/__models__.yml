@@ -1,0 +1,23 @@
+GoogLeNet_TConvs:
+  cnn: googlenet
+  mode: continuous
+  TConvs:
+    kernel1d: 5
+    pool1d: 3
+    padding1d: 1
+
+
+  rnn:
+    type: lstm
+    hidden_size: 512
+    num_layers: 2
+    dropout: 0.5
+    bidirectional: True
+I3D_RNN:
+  mode: continuous
+  rnn:
+    type: lstm
+    hidden_size: 512
+    num_layers: 2
+    dropout: 0.5
+    bidirectional: True

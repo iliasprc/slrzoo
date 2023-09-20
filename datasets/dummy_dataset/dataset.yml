@@ -1,0 +1,18 @@
+dataset:
+  name: dummy
+  modality: features
+  classes: 10
+  normalize: True
+  padding : False
+  dim: [224,224]
+  img_type: png
+  train:
+    seq_length: 250
+    augmentation: True
+  val:
+    seq_length: 300
+    augmentation: False
+  test:
+    seq_length: 300
+    augmentation: False
+

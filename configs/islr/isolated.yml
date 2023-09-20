@@ -1,0 +1,66 @@
+trainer:
+  logger: train_islr
+  batch-size: 20
+  epochs: 50
+  seed: 1234
+  cuda: True
+  gpu: 0
+  save: True
+  log_interval: 1000
+  ctc: normal
+  optimizer:
+    type: Adam
+    lr: 1e-5
+    weight_decay: 0.00001
+  scheduler:
+    type: ReduceLRonPlateau
+    scheduler_factor: 0.5
+    scheduler_patience: 5
+    scheduler_min_lr: 5e-6
+    scheduler_verbose: 5e-6
+  model:
+    mode: isolated
+    pretrained: False
+    backbone:
+      cnn: resnet18
+      temporal:
+        filters: 1024
+        kernel_size: 5
+        stride: 1
+        pool_size: 2
+        padding: 2
+    rnn:
+      type: lstm
+      hidden_size: 512
+      num_layers: 2
+      bidirectional: True
+      dropout: 0.5
+  dataset:
+    name: dummy
+    modality: features
+    images_path:
+    hand_image_path:
+    classes: 10
+    normalize: True
+    padding : False
+    dim: [224,224]
+    img_type: png
+    train:
+      batch_size: 16
+      shuffle: True
+      num_workers: 4
+      seq_length: 16
+      augmentation: True
+    validation:
+      batch_size: 16
+      shuffle: False
+      num_workers: 2
+      seq_length: 16
+      augmentation: False
+    test:
+      batch_size: 1
+      shuffle: False
+      num_workers: 2
+      seq_length: 16
+      augmentation: False
+

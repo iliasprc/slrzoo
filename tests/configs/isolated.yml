@@ -1,0 +1,12 @@
+trainer:
+  logger: main_fulls
+  optimizer:
+    type: Adam
+    lr: 5e-5
+    weight_decay: 0.000001
+  scheduler:
+    type: ReduceLRonPlateau
+    scheduler_factor: 0.5
+    scheduler_patience: 1
+    scheduler_min_lr: 5e-6
+    scheduler_verbose: 5e-6

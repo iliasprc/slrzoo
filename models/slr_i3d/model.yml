@@ -1,0 +1,34 @@
+model:
+  mode: unfold
+  phoenix2014:
+    window: 16
+    stride: 4
+    rnn:
+      hidden_size: 512
+      num_layers: 2
+      bidirectional: True
+      dropout: 0.5
+  gsl_si:
+    window: 24
+    stride: 6
+    rnn:
+      hidden_size: 512
+      num_layers: 2
+      bidirectional: True
+      dropout: 0.5
+  gsl_sd:
+    window: 24
+    stride: 6
+    rnn:
+      hidden_size: 512
+      num_layers: 2
+      bidirectional: True
+      dropout: 0.5
+  csl:
+    window: 50
+    stride: 25
+    rnn:
+      hidden_size: 512
+      num_layers: 2
+      bidirectional: True
+      dropout: 0.5

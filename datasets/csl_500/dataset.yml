@@ -1,0 +1,20 @@
+dataset:
+  name: csl_isolated
+  modality: features
+  images_path: csl/
+  features_path: csl/
+  classes: 500
+  normalize: True
+  padding : True
+  dim: [224,224]
+  img_type: jpg
+  train:
+    seq_length: 50
+    augmentation: True
+  validation:
+    seq_length: 50
+    augmentation: False
+  test:
+    seq_length: 50
+    augmentation: False
+
