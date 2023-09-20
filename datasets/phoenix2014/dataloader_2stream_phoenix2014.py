@@ -13,10 +13,10 @@ from torch.utils.data import Dataset
 import pathlib
 from utils.utils import load_csv_file
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/'
+dataset_path = 'data'
 ssd_path = ''
-phv1_path = '/home/papastrat/Desktop/ilias/datasets/phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/'
-hands_path = '/home/papastrat/Desktop/ilias/datasets/phoenix2014-release/phoenix-2014-multisigner/features/trackedRightHand-92x132px/'
+phv1_path = 'data/phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/'
+hands_path = 'data/phoenix2014-release/phoenix-2014-multisigner/features/trackedRightHand-92x132px/'
 
 # phv1_path='/media/papastrat/samsungssd/phoenix_version1/phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/'
 
@@ -121,9 +121,6 @@ class Phoenix2014_2stream_Dataset(Dataset):
 
         r_resize = ((256, 256))
 
-        # brightness = 1
-        # contrast = 1
-        # hue = 0
         t1 = VideoRandomResizedCrop(dim[0], scale=(0.9, 1.0), ratio=(0.8, 1.2))
         for img_path in images:
 

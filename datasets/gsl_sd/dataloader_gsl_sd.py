@@ -100,11 +100,8 @@ class GSL_SD(BaseDataset):
         else:
             c = torch.tensor([0], dtype=torch.int)
 
-        if os.path.exists(folder_path + '.npy'):
-            x = torch.FloatTensor(np.load(folder_path + '.npy')).squeeze(0)
-        else:
-            # print(folder_path, ' =empty')
-            x = 0.00000000001 * torch.randn(25, 1024)
+        x = torch.FloatTensor(np.load(folder_path + '.npy')).squeeze(0)
+
         return x, y, c
 
     def video_loader(self, index):
@@ -161,19 +158,8 @@ class GSL_SD(BaseDataset):
             ## CROP BOUNDING BOX
 
             frame1 = np.array(frame_o)
-            if augmentation == 'test':
-                if bbox != None:
-                    frame1 = frame1[:, bbox['x1']:bbox['x2']]
-                else:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
-            else:
 
-                if crop_or_bbox:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
-                elif bbox != None:
-                    frame1 = frame1[:, bbox['x1']:bbox['x2']]
-                else:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
+            frame1 = frame1[:, crop_size:648 - crop_size]
             frame = Image.fromarray(frame1)
             if (augmentation == 'train'):
 
@@ -198,7 +184,7 @@ class GSL_SD(BaseDataset):
         x1 = torch.stack(img_sequence).float()
 
         if (padding):
-            x1 = pad_video(x1, padding_size=pad_len, padding_type='zeros')
+            x1 = pad_video(x1, padding_size=pad_len, padding_type='images')
         if (len(images) < 20):
-            x1 = pad_video(x1, padding_size=20 - len(images), padding_type='zeros')
+            x1 = pad_video(x1, padding_size=20 - len(images), padding_type='images')
         return x1

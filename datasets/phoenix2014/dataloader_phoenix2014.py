@@ -13,11 +13,11 @@ from datasets.loader_utils import multi_label_to_index_out_of_vocabulary
 from datasets.loader_utils import video_transforms, pad_video, sampling, VideoRandomResizedCrop
 from utils.utils import load_csv_file
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/'
+dataset_path = 'data/'
 ssd_path = ''
 
-phv1_path = 'datasets/phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/'
-hands_path = 'datasets/phoenix2014-release/phoenix-2014-multisigner/features/h    '
+phv1_path = 'data/phoenix2014-release/phoenix-2014-multisigner/features/fullFrame-210x260px/'
+hands_path = 'data/phoenix2014-release/phoenix-2014-multisigner/features/h'
 
 
 class PHOENIX2014(BaseDataset):
@@ -31,21 +31,19 @@ class PHOENIX2014(BaseDataset):
         """
         config = OmegaConf.load(os.path.join(args.cwd, "datasets/phoenix2014/dataset.yml"))['dataset']
 
-
         self.modality = config.modality
         self.mode = mode
         filepath = 'files/phoenix2014/' + mode + '_phoenixv1.csv'
 
-
         self.list_IDs, self.labels = load_csv_file(os.path.join(args.cwd, filepath))
 
         if (self.modality == 'full'):
-            self.data_path = os.path.join(self.args.input_data, config.images_path,self.mode)
-            #print(self.args.input_data, config.images_path,self.data_path)
+            self.data_path = os.path.join(self.args.input_data, config.images_path, self.mode)
+            # print(self.args.input_data, config.images_path,self.data_path)
             self.get = self.video_loader
         elif (self.modality == 'hand'):
 
-            self.data_path = os.path.join(self.args.input_data, config.hand_image_path,self.mode)
+            self.data_path = os.path.join(self.args.input_data, config.hand_image_path, self.mode)
         elif (self.modality == 'features'):
             self.data_path = os.path.join(self.args.input_data, config.features_path)
             self.get = self.feature_loader
@@ -78,7 +76,7 @@ class PHOENIX2014(BaseDataset):
 
         y = multi_label_to_index_out_of_vocabulary(classes=self.classes, target_labels=self.labels[index])
         path = os.path.join(self.data_path, self.list_IDs[index])
-        #print(self.data_path, self.list_IDs[index],self.args.input_data)
+        # print(self.data_path, self.list_IDs[index],self.args.input_data)
         images = sorted(glob.glob(os.path.join(path, '*' + self.img_type)))
 
         h_flip = False

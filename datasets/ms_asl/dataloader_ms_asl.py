@@ -4,21 +4,15 @@ from torch.utils.data import Dataset
 
 from datasets.loader_utils import class2indextensor, load_video_sequence_uniform_sampling, select_ASL_subset, get_subset_paths_labels
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/MS_ASL/ms_asl_dataset/'
+dataset_path = 'data/MS_ASL/ms_asl_dataset/'
 mode = ['train', 'val', 'test']
-train_path = '/home/papastrat/Desktop/ilias/datasets/MS_ASL/MS-ASL_annotations/MSASL_train.json'
-val_path = '/home/papastrat/Desktop/ilias/datasets/MS_ASL/MS-ASL_annotations/MSASL_val.json'
-test_path = '/home/papastrat/Desktop/ilias/datasets/MS_ASL/MS-ASL_annotations/MSASL_test.json'
+train_path = 'data/MS_ASL/MS-ASL_annotations/MSASL_train.json'
+val_path = 'data/MS_ASL/MS-ASL_annotations/MSASL_val.json'
+test_path = 'data/MS_ASL/MS-ASL_annotations/MSASL_test.json'
 
 
 
 
-#
-# torch.manual_seed(SEED)
-# np.random.seed(SEED)
-# random.seed(SEED)
-#
-# torch.cuda.manual_seed(SEED)
 class MSASL_Dataset(Dataset):
     def __init__(self, args, mode, classes=1000, dim=(224, 224), modality=None):
         """

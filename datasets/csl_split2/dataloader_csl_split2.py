@@ -14,9 +14,9 @@ from datasets.loader_utils import video_transforms, pad_video, sampling, VideoRa
     multi_label_to_index, read_csl_paths
 from omegaconf import OmegaConf
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/csl_extracted/extracted'
 
-feats_path = 'csl_features'
+
+
 
 
 class CSL_SPLIT2(Dataset):
@@ -47,7 +47,7 @@ class CSL_SPLIT2(Dataset):
         self.normalize = config.normalize
         self.padding = config.padding
         filepath = './files/csl/csl_split2_unseen_sentence_' + self.mode + '.txt'
-
+        dataset_path = config.dataset.images_path
         self.list_IDs, self.labels = read_csl_paths(os.path.join(args.cwd, filepath))
 
         print("{} examples {}".format(self.mode, len(self.list_IDs)))

@@ -186,7 +186,7 @@ def select_scenario_for_training(args):
     #     train_prefix = "train"
     #     dev_prefix = "dev"
     #     test_prefix = "test"
-    #     indices, classes, id2w = read_gsl_continuous_classes('./files/GSL_continuous/continuous_classes.csv')
+    #     indices, classes, id2w = read_gsl_continuous_classes('./files/GSL_continuous/classes.csv')
     #     w2id = {v: k for k, v in id2w.items()}
     #     from data_loader.dataloader_greek_unseen_split import GSL_SD
     #     training_set = GSL_SD(args, train_prefix, classes, dim)
@@ -376,7 +376,7 @@ def select_continouous_dataset(args):
         train_prefix = "train"
 
         test_prefix = "test"
-        indices, classes, id2w = read_csl_classes(args.cwd.joinpath('files/csl/csl_continuous_classes.txt'))
+        indices, classes, id2w = read_csl_classes(args.cwd.joinpath('files/csl/csl_classes.txt'))
 
         from datasets.csl_split1.dataloader_csl_split1 import CSL_SPLIT1
         training_set = CSL_SPLIT1(args, train_prefix, classes, dim)
@@ -389,7 +389,7 @@ def select_continouous_dataset(args):
         train_prefix = "train"
 
         test_prefix = "test"
-        indices, classes, id2w = read_csl_classes(args.cwd.joinpath('files/csl/csl_continuous_classes.txt'))
+        indices, classes, id2w = read_csl_classes(args.cwd.joinpath('files/csl/csl_classes.txt'))
 
         from datasets.csl_split2.dataloader_csl_split2 import CSL_SPLIT2
         training_set = CSL_SPLIT2(args, train_prefix, classes, dim)
@@ -404,7 +404,7 @@ def select_continouous_dataset(args):
         test_prefix = "test"
 
         indices, classes, id2w = read_gsl_continuous_classes(
-            os.path.join(args.cwd, 'files/GSL_continuous/continuous_classes.csv'))
+            os.path.join(args.cwd, 'files/GSL_continuous/classes.csv'))
         w2id = {v: k for k, v in id2w.items()}
         from datasets.gsl_si.dataloader_gsl_si import GSL_SI
         training_set = GSL_SI(config={}, args=args, mode=train_prefix, classes=classes)
@@ -419,7 +419,7 @@ def select_continouous_dataset(args):
         dev_prefix = "dev"
         test_prefix = "test"
         indices, classes, id2w = read_gsl_continuous_classes(
-            os.path.join(args.cwd, 'files/GSL_continuous/continuous_classes.csv'))
+            os.path.join(args.cwd, 'files/GSL_continuous/classes.csv'))
         w2id = {v: k for k, v in id2w.items()}
         from datasets.gsl_sd.dataloader_gsl_sd import GSL_SD
         training_set = GSL_SD(args, train_prefix, classes, dim)
@@ -730,11 +730,11 @@ def load_video_sequence_uniform_sampling(path, time_steps, dim=(224, 224), augme
     pad_len = time_steps - len(images)
     if (len(img_sequence) < 1):
         img_sequence.append(torch.zeros((3, dim[0], dim[0])))
-        print(path)
+
         X1 = torch.stack(img_sequence).float()
-        print(X1.shape)
+
         X1 = pad_video(X1, padding_size=pad_len - 1, padding_type='zeros')
-    # print(len(mages))
+
     elif (padding):
         X1 = torch.stack(img_sequence).float()
         # print(X1.shape)

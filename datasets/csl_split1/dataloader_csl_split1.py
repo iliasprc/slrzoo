@@ -14,7 +14,6 @@ from datasets.loader_utils import video_transforms, pad_video, sampling, VideoRa
 
 dataset_path = 'csl_extracted/extracted'
 
-feats_path = 'csl_features'
 
 
 class CSL_SPLIT1(BaseDataset):

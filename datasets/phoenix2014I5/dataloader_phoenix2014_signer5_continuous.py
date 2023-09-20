@@ -4,9 +4,9 @@ from torch.utils.data import Dataset
 
 from datasets.loader_utils import load_video_sequence, multi_label_to_index_out_of_vocabulary, load_phoenix_signer_independent
 
-dataset_path = '/home/hatzis/Desktop/teo/'
+
 ssd_path = ''
-phv1_path = '/home/papastrat/Desktop/ilias/datasets/phoenix2014-release/phoenix-2014-signerindependent-SI5/features/fullFrame-210x260px/'
+phv1_path = 'data/phoenix2014-release/phoenix-2014-signerindependent-SI5/features/fullFrame-210x260px/'
 
 
 class PHOENIX_I5(Dataset):

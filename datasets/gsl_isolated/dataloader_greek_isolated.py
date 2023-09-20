@@ -12,7 +12,7 @@ from PIL import Image
 from torch.utils.data import Dataset
 import pathlib
 from datasets.loader_utils import class2indextensor
-from datasets.loader_utils import pad_video, video_transforms, sampling, VideoRandomResizedCrop, read_gsl_isolated, read_bounding_box
+from datasets.loader_utils import pad_video, video_transforms, sampling, VideoRandomResizedCrop, read_gsl_isolated
 
 root_path = 'Greek_isolated/GSL_isol/'
 train_prefix = "train"
@@ -20,7 +20,6 @@ dev_prefix = "test"
 test_augmentation = 'augment'
 train_filepath = "files/GSL_isolated/train_greek_iso.csv"
 dev_filepath = "files/GSL_isolated/dev_greek_iso.csv"
-
 
 
 class GSL_ISO(Dataset):
@@ -34,9 +33,8 @@ class GSL_ISO(Dataset):
             dim: Dimensions of the frames
         """
         self.classes = classes
-        print('Classes {}'.format(len(classes)))
+
         cwd_path = pathlib.Path.cwd()
-        self.bbox = read_bounding_box(cwd_path.joinpath('files/GSL_isolated/bbox_for_gsl_isolated.txt'))
         # print(self.bbox)
         if mode == train_prefix:
             self.list_video_paths, self.list_glosses = read_gsl_isolated(cwd_path.joinpath(train_filepath))
@@ -79,13 +77,8 @@ class GSL_ISO(Dataset):
         # print(os.path.join(path, '*' + img_type))
         path = os.path.join(self.root_path, self.list_video_paths[index])
         images = sorted(glob.glob(os.path.join(path, '*' + img_type)))
-        # print(path)
-        h_flip = False
+
         img_sequence = []
-        # print(len(images))
-        # print(self.bbox)
-        bbox = self.bbox.get(self.list_video_paths[index])
-        # print(self.list_video_paths[index],self.bbox.get(self.list_video_paths[index]))
 
         if (augmentation == 'train'):
             ## training set temporal  AUGMENTATION
@@ -111,7 +104,6 @@ class GSL_ISO(Dataset):
         to_flip = random.uniform(0, 1) > 0.9
         grayscale = random.uniform(0, 1) > 0.9
 
-
         if (len(images) == 0):
             print('frames zero ', path)
 
@@ -126,18 +118,11 @@ class GSL_ISO(Dataset):
 
             frame1 = np.array(frame_o)
             if augmentation == 'test':
-                if bbox != None:
-                    frame1 = frame1[:, bbox['x1']:bbox['x2']]
-                else:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
+
+                frame1 = frame1[:, crop_size:648 - crop_size]
             else:
 
-                if crop_or_bbox:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
-                elif bbox != None:
-                    frame1 = frame1[:, bbox['x1']:bbox['x2']]
-                else:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
+                frame1 = frame1[:, crop_size:648 - crop_size]
             frame = Image.fromarray(frame1)
             if (augmentation == 'train'):
 
@@ -148,7 +133,7 @@ class GSL_ISO(Dataset):
                 img_tensor = video_transforms(img=frame, i=i, j=j, bright=brightness, cont=contrast, h=hue, dim=dim,
                                               resized_crop=t1,
                                               augmentation='train',
-                                              normalize=normalize,to_flip=to_flip,grayscale=grayscale)
+                                              normalize=normalize, to_flip=to_flip, grayscale=grayscale)
                 img_sequence.append(img_tensor)
             else:
                 # TEST set  NO DATA AUGMENTATION
@@ -162,6 +147,6 @@ class GSL_ISO(Dataset):
         X1 = torch.stack(img_sequence).float()
 
         if (padding):
-            X1 = pad_video(X1, padding_size=pad_len, padding_type='zeros')
-        X1 = X1.permute(1,0,2,3)
+            X1 = pad_video(X1, padding_size=pad_len, padding_type='images')
+        X1 = X1.permute(1, 0, 2, 3)
         return X1

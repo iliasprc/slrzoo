@@ -1,3 +1,4 @@
+import logging
 import os
 import sys
 
@@ -11,9 +12,9 @@ import torch
 from PIL import Image
 from torch.utils.data import Dataset
 
-from datasets.loader_utils import video_transforms, pad_video, sampling, VideoRandomResizedCrop,read_csl_paths
+from datasets.loader_utils import video_transforms, pad_video, sampling, VideoRandomResizedCrop, read_csl_paths
 
-
+logger = logging.getLogger('train_islr.dataloader')
 
 
 class CSL_ISO(Dataset):
@@ -54,7 +55,7 @@ class CSL_ISO(Dataset):
         elif (self.mode == 'test'):
             self.list_IDs, self.labels = read_csl_paths('./files/csl_isolated/dictionary_chineze_isolated_test.txt')
         # print(self.list_IDs,self.labels)
-        print("{} examples {}".format(self.mode, len(self.list_IDs)))
+        logger.info("{} examples {}".format(self.mode, len(self.list_IDs)))
         self.classes = classes
         self.seq_length = args.seq_length
         self.dim = dim
@@ -88,7 +89,7 @@ class CSL_ISO(Dataset):
         # augmentation = 'test'
         h_flip = False
         img_sequence = []
-        # print(images)
+
         if (augmentation == 'train'):
             ## training set temporal  AUGMENTATION
             temporal_augmentation = int((np.random.randint(80, 100) / 100.0) * len(images))
@@ -142,10 +143,10 @@ class CSL_ISO(Dataset):
         pad_len = time_steps - len(images)
 
         X1 = torch.stack(img_sequence).float()
-        # print(len(images))
+
         if (padding):
             X1 = pad_video(X1, padding_size=pad_len, padding_type='zeros')
-        elif (len(images) < 52):
-            X1 = pad_video(X1, padding_size=52 - len(images), padding_type='zeros')
+        elif (len(images) < 50):
+            X1 = pad_video(X1, padding_size=50 - len(images), padding_type='zeros')
 
         return X1

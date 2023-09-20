@@ -12,18 +12,14 @@ from omegaconf import OmegaConf
 from datasets.loader_utils import class2indextensor, pad_video, sampling, video_transforms, \
     VideoRandomResizedCrop, read_ph2014_isolated
 
-dataset_path = '/home/papastrat/Desktop/ilias/datasets/phoenix2014_isolated_train/'
-hand_path = '/home/papastrat/Desktop/ilias/datasets/phoenix2014_isolated_train/'
+dataset_path = 'data/phoenix2014_isolated_train/'
+hand_path = 'data/phoenix2014_isolated_train/'
 
 train_prefix = "train"
 dev_prefix = "test"
 
 
-# torch.manual_seed(SEED)
-# np.random.seed(SEED)
-# random.seed(SEED)
-#
-# torch.cuda.manual_seed(SEED)
+
 class PHOENIX2014_ISO(BaseDataset):
     def __init__(self, config, args, mode, classes):
         super(PHOENIX2014_ISO, self).__init__(config, args, mode, classes)

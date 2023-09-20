@@ -144,22 +144,8 @@ class GSL_SI(BaseDataset):
             ## CROP BOUNDING BOX
 
             frame1 = np.array(frame_o)
-            if self.augmentation:
 
-                if crop_or_bbox:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
-                elif bbox != None:
-                    frame1 = frame1[:, bbox['x1']:bbox['x2']]
-                else:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
-
-
-            else:
-
-                if bbox != None:
-                    frame1 = frame1[:, bbox['x1']:bbox['x2']]
-                else:
-                    frame1 = frame1[:, crop_size:648 - crop_size]
+            frame1 = frame1[:, crop_size:648 - crop_size]
             frame = Image.fromarray(frame1)
 
             if self.augmentation:
