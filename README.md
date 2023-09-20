@@ -62,11 +62,13 @@ Download datasets from their websites and place them under the corresponding dir
 * [Phoenix-2014](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX/)
 * [Phoenix-2014T](https://www-i6.informatik.rwth-aachen.de/~koller/RWTH-PHOENIX-2014-T/)
 * [CSL-Daily](http://home.ustc.edu.cn/~zhouh156/dataset/csl-daily/)
+* [CSL-500](https://ustc-slr.github.io/datasets/2015_csl/)
+* [GSL](https://zenodo.org/record/3941811)
+* [MS-ASL](https://microsoft.github.io/data-for-society/dataset?d=MS-ASL-American-Sign-Language-Dataset)
 
-Then run [preprocess/preprocess_video.sh](preprocess/preprocess_video.sh) to extract the downloaded videos. 
 
 
-### Related work
+### Implemented methods
 
 1. Camgoz, N. C., Hadfield, S., Koller, O., & Bowden, R. (2017, October). Subunets: End-to-end hand shape and continuous sign language recognition. In 2017 IEEE International Conference on Computer Vision (ICCV) (pp. 3075-3084). IEEE.
 
@@ -76,7 +78,6 @@ Then run [preprocess/preprocess_video.sh](preprocess/preprocess_video.sh) to ext
 
 1. Pu, Junfu, Wengang Zhou, and Houqiang Li. "Iterative alignment network for continuous sign language recognition." Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition. 2019.
 
-1. Yang, Zhaoyang, et al. "SF-Net: Structured Feature Network for Continuous Sign Language Recognition." arXiv preprint arXiv:1908.01341 (2019).
 
 
 

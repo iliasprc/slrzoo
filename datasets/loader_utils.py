@@ -15,14 +15,14 @@ from torchvision import transforms
 from utils.utils import load_config
 
 
-def select_isolated_dataset(config,args):
+def select_isolated_dataset(config, args):
     dim = (224, 224)
 
     test_params = {'batch_size': config.dataset.train.batch_size,
                    'shuffle': False,
                    'num_workers': 2}
 
-    train_params = {'batch_size':config.dataset.validation.batch_size,
+    train_params = {'batch_size': config.dataset.validation.batch_size,
                     'shuffle': True,
                     'num_workers': 2}
     config = config.dataset
@@ -126,76 +126,13 @@ def select_isolated_dataset(config,args):
     else:
         from datasets.dummy_dataset.islr_dataset import RandomISLRdataset
         classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        training_set = RandomISLRdataset(config,args, 'train',classes)
+        training_set = RandomISLRdataset(config, args, 'train', classes)
         training_generator = data.DataLoader(training_set, **train_params)
 
-        val_set = RandomISLRdataset(config,args, 'validation',classes)
+        val_set = RandomISLRdataset(config, args, 'validation', classes)
         validation_generator = data.DataLoader(val_set, **train_params)
-        dict_ = dict(zip(classes,classes))
-        return training_generator, validation_generator,None, classes
-
-def select_sc_filse(scen):
-    if scen == 'health':
-        train_filepath = "files/GSL_continuous/yphresies/health/health_train_SI.txt"
-        dev_filepath = "files/GSL_continuous/yphresies/health/health_dev_SI.txt"
-        test_filepath = "files/GSL_continuous/yphresies/health/health_test_SI.txt"
-        class_path = 'files/GSL_continuous/yphresies/health/health_classes.txt'
-    elif scen == 'police':
-        train_filepath = "files/GSL_continuous/yphresies/police/police_train_SI.txt"
-        dev_filepath = "files/GSL_continuous/yphresies/police/police_dev_SI.txt"
-        test_filepath = "files/GSL_continuous/yphresies/police/police_test_SI.txt"
-        class_path = 'files/GSL_continuous/yphresies/police/police_classes.txt'
-    elif scen == 'kep':
-        train_filepath = "files/GSL_continuous/yphresies/kep/kep_train_SI.txt"
-        dev_filepath = "files/GSL_continuous/yphresies/kep/kep_dev_SI.txt"
-        test_filepath = "files/GSL_continuous/yphresies/kep/kep_test_SI.txt"
-        class_path = 'files/GSL_continuous/yphresies/kep/kep_classes.txt'
-    return train_filepath, dev_filepath, test_filepath, class_path
-
-
-def select_scenario_for_training(args):
-    dim = (224, 224)
-    test_params = {'batch_size': args.batch_size,
-                   'shuffle': False,
-                   'num_workers': 2}
-
-    train_params = {'batch_size': args.batch_size,
-                    'shuffle': True,
-                    'num_workers': 2}
-
-    scenario = ['kep', 'police', 'health']
-
-    train_filepath, dev_filepath, test_filepath, class_path = select_sc_filse(scenario[2])
-    train_prefix = "train"
-    dev_prefix = "dev"
-    test_prefix = "test"
-    train_filepath = args.cwd.parent.joinpath(train_filepath)
-    dev_filepath = args.cwd.parent.joinpath(dev_filepath)
-    test_filepath = args.cwd.parent.joinpath(test_filepath)
-    indices, classes, id2w = read_gsl_continuous_classes(args.cwd.parent.joinpath(class_path))
-    w2id = {v: k for k, v in id2w.items()}
-    from datasets.dataloader_greek_scenaria import KENG
-    training_set = KENG(args, train_prefix, classes, train_filepath, dev_filepath, test_filepath, dim)
-    training_generator = data.DataLoader(training_set, **train_params)
-    validation_set = KENG(args, dev_prefix, classes, train_filepath, dev_filepath, test_filepath, dim)
-    validation_generator = data.DataLoader(validation_set, **test_params)
-    test_set = KENG(args, test_prefix, classes, train_filepath, dev_filepath, test_filepath, dim)
-    test_generator = data.DataLoader(test_set, **test_params)
-    return training_generator, validation_generator, test_generator, classes, id2w, w2id
-    # elif (args.dataset == 'GSL_SD'):
-    #     train_prefix = "train"
-    #     dev_prefix = "dev"
-    #     test_prefix = "test"
-    #     indices, classes, id2w = read_gsl_continuous_classes('./files/GSL_continuous/classes.csv')
-    #     w2id = {v: k for k, v in id2w.items()}
-    #     from data_loader.dataloader_greek_unseen_split import GSL_SD
-    #     training_set = GSL_SD(args, train_prefix, classes, dim)
-    #     training_generator = data.DataLoader(training_set, **train_params)
-    #     validation_set = GSL_SD(args, dev_prefix, classes, dim)
-    #     validation_generator = data.DataLoader(validation_set, **test_params)
-    #     test_set = GSL_SD(args, test_prefix, classes, dim)
-    #     test_generator = data.DataLoader(test_set, **test_params)
-    # return training_generator, validation_generator, test_generator, classes, id2w, w2id
+        dict_ = dict(zip(classes, classes))
+        return training_generator, validation_generator, None, classes
 
 
 def select_continouous_dataset(args):
@@ -318,41 +255,6 @@ def select_continouous_dataset(args):
 
         return training_generator, validation_generator, test_generator, classes, id2w, w2id
 
-    elif (args.dataset == 'phoenix2014_cui_aug'):
-        train_prefix = "train"
-        dev_prefix = "dev"
-        test_prefix = "test"
-        p = args.cwd.joinpath('files/phoenix2014/classes.txt')
-        classes, indices = read_phoenix_2014_classes(p)
-        print('Number of Classes {} from file {} \n \n  '.format(len(classes), p))
-        id2w = dict(zip(indices, classes))
-
-        from datasets.phoenix2014.dataloader_phoenix2014_cui_augmentations import PH2014_CUI_AUG
-        training_set = PH2014_CUI_AUG(train_prefix, classes, dim, modality=args.modality)
-        training_generator = data.DataLoader(training_set, **train_params)
-
-        validation_set = PH2014_CUI_AUG(dev_prefix, classes, dim, modality=args.modality)
-        validation_generator = data.DataLoader(validation_set, **test_params)
-
-        test_set = PH2014_CUI_AUG(test_prefix, classes, dim, modality=args.modality)
-        test_generator = data.DataLoader(test_set, **test_params)
-
-        print(len(id2w))
-        # for i in id2w:
-        #     print(i)
-        id2w[len(id2w)] = 'SOS'
-        id2w[len(id2w)] = 'EOS'
-        classes.append("SOS")
-        classes.append("EOS")
-        # for k in id2w:
-        #     print(k,id2w[k])
-
-        print(id2w)
-        # print(id2w['EOS'])
-        w2id = {v: k for k, v in id2w.items()}
-
-        return training_generator, validation_generator, test_generator, classes, id2w, w2id
-
     elif (args.dataset == 'phoenixI5'):
         train_prefix = "train"
         dev_prefix = "dev"
@@ -449,13 +351,13 @@ def select_continouous_dataset(args):
     else:
         from datasets.dummy_dataset.cslr_dataset import RandomCSLRdataset
         classes = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
-        training_set = RandomCSLRdataset(None,args, 'train',classes)
+        training_set = RandomCSLRdataset(None, args, 'train', classes)
         training_generator = data.DataLoader(training_set, **train_params)
 
-        val_set = RandomCSLRdataset(None,args, 'val',classes)
+        val_set = RandomCSLRdataset(None, args, 'val', classes)
         validation_generator = data.DataLoader(val_set, **train_params)
-        dict_ = dict(zip(classes,classes))
-        return training_generator, validation_generator, None, classes, dict_,dict_
+        dict_ = dict(zip(classes, classes))
+        return training_generator, validation_generator, None, classes, dict_, dict_
 
 
 def rescale_list(input_list, size):
